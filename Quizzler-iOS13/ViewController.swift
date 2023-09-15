@@ -54,12 +54,16 @@ class ViewController: UIViewController {
         
         if questionNumber + 1 <= quiz.count {
             questionNumber += 1
-            updateUI()
         }
+        
+        Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
          
     }
     
-    func updateUI() {
+    @objc func updateUI() {
+        progressBar.progress = Float(questionNumber)/Float(quiz.count)
+        trueButton.backgroundColor = UIColor.clear
+        falseButton.backgroundColor = UIColor.clear
         if questionNumber <= quiz.count {
             questionLabel.text = quiz[questionNumber].text
         }
